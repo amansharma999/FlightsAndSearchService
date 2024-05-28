@@ -1,5 +1,5 @@
 {
-  "name": "flightsandsearch",
+  "name": "flightsandsearchservice",
   "version": "1.0.0",
   "description": "Micro Service for handling Flight CRUD",
   "main": "index.js",
