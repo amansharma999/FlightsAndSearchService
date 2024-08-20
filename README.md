@@ -40,3 +40,4 @@
 ```
 npx sequelize model:generate --name Airport --attributes name:String,address:String,CityId:Integer
 ```
+
