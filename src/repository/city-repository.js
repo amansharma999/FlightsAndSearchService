@@ -48,7 +48,7 @@ class CityRepository {
   }
   async getAllCities(filter) {
     //filter can also be empty
-    try {
+    try { 
       if (filter.name) {
         const cities = await City.findAll({
           where: {
