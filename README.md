@@ -8,6 +8,7 @@
 4. [Tools and Technologies](#tools-and-technologies)
 5. [Database Design](#database-design)
 6. [Acknowledgements](#acknowledgements)
+7. [Contributing](#contributing)
 
 ## Project Overview
 
@@ -20,7 +21,7 @@ The Flights and Search Service is a microservice designed to handle CRUD operati
 1. Clone the project:
 
    ```sh
-   git clone https://github.com/amansharma999/FlightsAndSearchService
+   git clone https://github.com/amansharma999/FlightsAndSearchService.git
    cd flightsAndSearchService
    ```
 
