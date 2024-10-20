@@ -6,12 +6,17 @@ const { FlightMiddlewares } = require("../../middlewares/index");
 
 const router = express.Router();
 
+
+//city routes
 router.post("/city", CityController.create);
 router.delete("/city/:id", CityController.destroy);
 router.get("/city/:id", CityController.get);
 router.get("/city", CityController.getAll);
 router.patch("/city/:id", CityController.update);
 
+
+
+//flights
 router.post(
   "/flights",
   FlightMiddlewares.validateCreateFlight,

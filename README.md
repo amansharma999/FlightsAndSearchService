@@ -70,7 +70,7 @@ SYNC_DB=true
 
 - **Create City**
 
-  - **URL:** `/api/city`
+  - **URL:** `/flightsservice/api/city`
   - **Method:** `POST`
   - **Body Parameters:**
     - `name` (string, required): The name of the city.
@@ -84,19 +84,20 @@ SYNC_DB=true
         "err": {}
       }
       ```
-    - **Error:** 400 Bad Request
-      ```json
-      {
-        "data": {},
-        "success": false,
-        "message": "Invalid request body for creating a city",
-        "err": "Missing required fields"
-      }
-      ```
+      - **ERROR:** 500 Internal Server Error
+        ```json
+        {
+          "data": {},
+          "success": false,
+          "message": "Not able to create a city",
+          "err": "Internal server error"
+        }
+        ```
+  
 
 - **Delete City**
 
-  - **URL:** `/api/city/:id`
+  - **URL:** `/flightsservice/api/city/:id`
   - **Method:** `DELETE`
   - **URL Parameters:**
     - `id` (integer, required): The ID of the city to delete.
@@ -110,21 +111,103 @@ SYNC_DB=true
         "err": {}
       }
       ```
-    - **Error:** 404 Not Found
+  - **Error:** 500 Internal Server Error
+    ```json
+    {
+      "data": {},
+      "success": false,
+      "message": "Not able to delete a city",
+      "err": "Internal server error"
+    }
+    ```
+
+
+   
+- **Get City by ID**
+
+  - **URL:** `/flightsservice/api/city/:id`
+  - **Method:** `GET`
+  - **URL Parameters:**
+    - `id` (integer, required): The ID of the city to retrieve.
+  - **Response:**
+    - **Success:** 200 OK
+      ```json
+      {
+        "data": { "id": 1, "name": "CityName" },
+        "success": true,
+        "message": "City retrieved successfully",
+        "err": {}
+      }
+      ```
+    - **Error:** 500 Internal Server Error
       ```json
       {
         "data": {},
         "success": false,
-        "message": "City not found",
-        "err": "City with the given ID does not exist"
+        "message": "Not able to get the  city",
+        "err": "Internal server error"
       }
       ```
+- **Update City**
+  
+    - **URL:** `/flightsservice/api/city/:id`
+    - **Method:** `PATCH`
+    - **URL Parameters:**
+      - `id` (integer, required): The ID of the city to update.
+    - **Body Parameters:**
+      - `name` (string, required): The updated name of the city.
+    - **Response:**
+      - **Success:** 200 OK
+        ```json
+        {
+          "data": { "id": 1, "name": "UpdatedCityName" },
+          "success": true,
+          "message": "City updated successfully",
+          "err": {}
+        }
+        ```
+      - **Error:** 500 Internal Server Error
+        ```json
+        {
+          "data": {},
+          "success": false,
+          "message": "Not able to update the city",
+          "err": "Internal server error"
+        }
+        ```
+- **Get All Cities**
+  
+    - **URL:** `/flightsservice/api/city`
+    - **Method:** `GET`
+    - **Response:**
+      - **Success:** 200 OK
+        ```json
+        {
+          "data": [
+            { "id": 1, "name": "CityName1" },
+            { "id": 2, "name": "CityName2" }
+          ],
+          "success": true,
+          "message": "Cities fetched successfully",
+          "err": {}
+        }
+        ```
+      - **Error:** 500 Internal Server Error
+        ```json
+        {
+          "data": [],
+          "success": false,
+          "message": "Not able to fetch  all  cities",
+          "err": "Internal server error"
+        }
+        ```
+
 
 ### Flight Endpoints
 
 - **Create Flight**
 
-  - **URL:** `/api/flights`
+  - **URL:** `/flightsservice/api/flights`
   - **Method:** `POST`
   - **Body Parameters:**
     - `flightNumber` (string, required): The flight number.
@@ -139,14 +222,41 @@ SYNC_DB=true
       ```json
       {
         "data": {
-          /* flight data */
+              "id": "<FLIGHT_ID>",
+
+            "flightNumber": "<FLIGHT_NUMBER>",
+
+            "airplaneId": "<AIRPLANE_ID>",
+
+            "departureAirportId": "<DEPARTURE_AIRPORT_ID>",
+
+            "arrivalAirportId": "<ARRIVAL_AIRPORT_ID>",
+
+            "departureTime": "<DEPARTURE_TIME>",
+
+            "arrivalTime": "<ARRIVAL_TIME>",
+
+            "price": "<PRICE>",
+
+            "boardingGate": "<BOARDING_GATE>",
+
+            "totalSeats": "<TOTAL_SEATS>"
         },
         "success": true,
         "message": "Flight created successfully",
         "err": {}
       }
       ```
-    - **Error:** 400 Bad Request
+    - **Error:** 500 Internal Server Error
+      ```json
+      {
+        "data": {},
+        "success": false,
+        "message": "Not able to create a flight",
+        "err": "Internal server error"
+      }
+      ```
+    - **Error** 400 Bad Request
       ```json
       {
         "data": {},
@@ -155,10 +265,11 @@ SYNC_DB=true
         "err": "Missing required fields"
       }
       ```
+  
 
 - **Get Flight**
 
-  - **URL:** `/api/flights/:id`
+  - **URL:** `/flightsservice/api/flights/:id`
   - **Method:** `GET`
   - **URL Parameters:**
     - `id` (integer, required): The ID of the flight to retrieve.
@@ -167,50 +278,127 @@ SYNC_DB=true
       ```json
       {
         "data": {
-          /* flight data */
+          "id": "<FLIGHT_ID>",
+          "flightNumber": "<FLIGHT_NUMBER>",
+          "airplaneId": "<AIRPLANE_ID>",
+          "departureAirportId": "<DEPARTURE_AIRPORT_ID>",
+          "arrivalAirportId": "<ARRIVAL_AIRPORT_ID>",
+          "departureTime": "<DEPARTURE_TIME>",
+          "arrivalTime": "<ARRIVAL_TIME>",
+          "price": "<PRICE>",
+          "boardingGate": "<BOARDING_GATE>",
+          "totalSeats": "<TOTAL_SEATS>"
+        }
         },
         "success": true,
         "message": "Flight retrieved successfully",
         "err": {}
       }
       ```
-    - **Error:** 404 Not Found
+    - **Error:** 500 Internal Server Error
       ```json
       {
         "data": {},
         "success": false,
-        "message": "Flight not found",
-        "err": "Flight with the given ID does not exist"
+        "message": "Not able to fetch the flight",
+        "err": "Internal server error"
+      }
+      ```
+- **Get All Flights**
+
+  - **URL:** `/flightsservice/api/flights`
+  - **Method:** `GET`
+  - **Response:**
+    - **Success:** 200 OK
+      ```json
+      {
+        "data": [
+          {
+            "id": "<FLIGHT_ID_1>",
+            "flightNumber": "<FLIGHT_NUMBER_1>",
+            "airplaneId": "<AIRPLANE_ID_1>",
+            "departureAirportId": "<DEPARTURE_AIRPORT_ID_1>",
+            "arrivalAirportId": "<ARRIVAL_AIRPORT_ID_1>",
+            "departureTime": "<DEPARTURE_TIME_1>",
+            "arrivalTime": "<ARRIVAL_TIME_1>",
+            "price": "<PRICE_1>",
+            "boardingGate": "<BOARDING_GATE_1>",
+            "totalSeats": "<TOTAL_SEATS_1>"
+          },
+          {
+            "id": "<FLIGHT_ID_2>",
+            "flightNumber": "<FLIGHT_NUMBER_2>",
+            "airplaneId": "<AIRPLANE_ID_2>",
+            "departureAirportId": "<DEPARTURE_AIRPORT_ID_2>",
+            "arrivalAirportId": "<ARRIVAL_AIRPORT_ID_2>",
+            "departureTime": "<DEPARTURE_TIME_2>",
+            "arrivalTime": "<ARRIVAL_TIME_2>",
+            "price": "<PRICE_2>",
+            "boardingGate": "<BOARDING_GATE_2>",
+            "totalSeats": "<TOTAL_SEATS_2>"
+          }
+        ],
+        "success": true,
+        "message": "Flights fetched successfully",
+        "err": {}
+      }
+      ```
+      ```
+    - **Error:** 500 Internal Server Error
+      ```json
+      {
+        "data": [],
+        "success": false,
+        "message": "Not able to fetch all flights",
+        "err": "Internal server error"
       }
       ```
 
+
 - **Update Flight**
 
-  - **URL:** `/api/flights/:id`
+  - **URL:** `/flightsservice/api/flights/:id`
   - **Method:** `PATCH`
   - **URL Parameters:**
     - `id`(integer, required): The ID of the flight to update.
   - **Body Parameters:**
-    - Any of the flight fields to update.
+    - `flightNumber` (string, optional): The updated flight number.
+    - `airplaneId` (integer, optional): The updated ID of the airplane.
+    - `departureAirportId` (integer, optional): The updated ID of the departure airport.
+    - `arrivalAirportId` (integer, optional): The updated ID of the arrival airport.
+    - `departureTime` (string, optional): The updated departure time in ISO format.
+    - `arrivalTime` (string, optional): The updated arrival time in ISO format.
+    - `price` (integer, optional): The updated price of the flight.
+    - `boardingGate` (string, optional): The updated boarding gate.
+    - `totalSeats` (integer, optional): The updated total number of seats.
   - **Response:**
     - **Success:** 200 OK
       ```json
       {
         "data": {
-          /* updated flight data */
+          "id": "<FLIGHT_ID>",
+          "flightNumber": "<FLIGHT_NUMBER>",
+          "airplaneId": "<AIRPLANE_ID>",
+          "departureAirportId": "<DEPARTURE_AIRPORT_ID>",
+          "arrivalAirportId": "<ARRIVAL_AIRPORT_ID>",
+          "departureTime": "<DEPARTURE_TIME>",
+          "arrivalTime": "<ARRIVAL_TIME>",
+          "price": "<PRICE>",
+          "boardingGate": "<BOARDING_GATE>",
+          "totalSeats": "<TOTAL_SEATS>"
         },
         "success": true,
         "message": "Flight updated successfully",
         "err": {}
       }
       ```
-    - **Error:** 404 Not Found
+    - **Error:** 500 Internal Server Error
       ```json
       {
         "data": {},
         "success": false,
-        "message": "Flight not found",
-        "err": "Flight with the given ID does not exist"
+        "message": "Not able to update the flight",
+        "err": "Internal server error"
       }
       ```
 
